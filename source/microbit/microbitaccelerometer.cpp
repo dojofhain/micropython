@@ -110,18 +110,18 @@ mp_obj_t microbit_accelerometer_get_values(mp_obj_t self_in) {
 MP_DEFINE_CONST_FUN_OBJ_1(microbit_accelerometer_get_values_obj, microbit_accelerometer_get_values);
 
 STATIC const qstr gesture_name_map[] = {
-    [MICROBIT_ACCELEROMETER_EVT_NONE] = MP_QSTR_NULL,
-    [MICROBIT_ACCELEROMETER_EVT_TILT_UP] = MP_QSTR_up,
-    [MICROBIT_ACCELEROMETER_EVT_TILT_DOWN] = MP_QSTR_down,
-    [MICROBIT_ACCELEROMETER_EVT_TILT_LEFT] = MP_QSTR_left,
-    [MICROBIT_ACCELEROMETER_EVT_TILT_RIGHT] = MP_QSTR_right,
-    [MICROBIT_ACCELEROMETER_EVT_FACE_UP] = MP_QSTR_face_space_up,
-    [MICROBIT_ACCELEROMETER_EVT_FACE_DOWN] = MP_QSTR_face_space_down,
-    [MICROBIT_ACCELEROMETER_EVT_FREEFALL] = MP_QSTR_freefall,
-    [MICROBIT_ACCELEROMETER_EVT_3G] = MP_QSTR_3g,
-    [MICROBIT_ACCELEROMETER_EVT_6G] = MP_QSTR_6g,
-    [MICROBIT_ACCELEROMETER_EVT_8G] = MP_QSTR_8g,
-    [MICROBIT_ACCELEROMETER_EVT_SHAKE] = MP_QSTR_shake,
+    MP_QSTR_NULL,
+    MP_QSTR_up,
+    MP_QSTR_down,
+    MP_QSTR_left,
+    MP_QSTR_right,
+    MP_QSTR_face_space_up,
+    MP_QSTR_face_space_down,
+    MP_QSTR_freefall,
+    MP_QSTR_3g,
+    MP_QSTR_6g,
+    MP_QSTR_8g,
+    MP_QSTR_shake,
 };
 
 STATIC uint32_t gesture_from_obj(mp_obj_t gesture_in) {
