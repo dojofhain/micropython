@@ -1,3 +1,5 @@
+> This is a fork of the original MicroPython adapted for the [Calliope](http://calliope.cc) board.
+
 MicroPython for the BBC micro:bit
 =================================
 
@@ -28,10 +30,10 @@ Once all packages are installed, use yotta to build.  You will need an ARM
 mbed account to complete the first command, and will be prompted to create one
 as a part of the process.
 
-- Use target bbc-microbit-classic-gcc-nosd:
+- Use target calliope-mini-classic-gcc-nosd:
 
   ```
-  yt target bbc-microbit-classic-gcc-nosd
+  yt target calliope-mini-classic-gcc-nosd
   ```
 
 - Run yotta update to fetch remote assets:
@@ -47,7 +49,7 @@ as a part of the process.
   ```
 
 The resulting microbit-micropython.hex file to flash onto the device can be
-found in the build/bbc-microbit-classic-gcc-nosd/source from the root of the
+found in the build/calliope-mini-classic-gcc-nosd/source from the root of the
 repository.
 
 There is a Makefile provided that does some extra preprocessing of the source,

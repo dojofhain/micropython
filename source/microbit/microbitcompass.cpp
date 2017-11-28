@@ -44,7 +44,7 @@ void microbit_compass_init(void) {
     // load any peristent calibration data if it exists
     uint32_t *persist = (uint32_t*)microbit_compass_calibration_page();
     if (persist[0] == COMPASS_CALIBRATION_MAGIC) {
-        CompassSample samp = {(int)persist[1], (int)persist[2], (int)persist[3]};
+        CompassSample samp((int)persist[1], (int)persist[2], (int)persist[3]);
         ubit_compass.setCalibration(samp);
     }
 }
