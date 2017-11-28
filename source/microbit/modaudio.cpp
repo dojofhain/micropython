@@ -1,5 +1,5 @@
 /*
- * This file is part of the Micro Python project, http://micropython.org/
+ * This file is part of the MicroPython project, http://micropython.org/
  *
  * The MIT License (MIT)
  *
@@ -28,7 +28,6 @@
 
 extern "C" {
 
-#include "microbit/modmicrobit.h"
 #include "gpio_api.h"
 #include "device.h"
 #include "nrf_gpio.h"
@@ -42,9 +41,8 @@ extern "C" {
 #include "py/objstr.h"
 #include "py/mphal.h"
 #include "py/gc.h"
+#include "microbit/modmicrobit.h"
 #include "microbit/modaudio.h"
-#include "microbit/microbitobj.h"
-#include "microbit/microbitpin.h"
 
 #define TheTimer NRF_TIMER1
 #define TheTimer_IRQn TIMER1_IRQn
@@ -171,7 +169,6 @@ static void init_pin(const microbit_pin_obj_t *p0) {
 }
 
 static void init_pins(const microbit_pin_obj_t *p0, const microbit_pin_obj_t *p1) {
-    microbit_obj_pin_fail_if_cant_acquire(p0);
     microbit_obj_pin_acquire(p1, microbit_pin_mode_audio_play);
     microbit_obj_pin_acquire(p0, microbit_pin_mode_audio_play);
     pin0 = p0;
@@ -417,12 +414,12 @@ void audio_play_source(mp_obj_t src, mp_obj_t pin1, mp_obj_t pin2, bool wait) {
         if (pin2 == mp_const_none) {
             audio_auto_set_pins();
         } else {
-            nlr_raise(mp_obj_new_exception_msg(&mp_type_TypeError, "Cannot set return_pin without pin"));
+            mp_raise_TypeError("cannot set return_pin without pin");
         }
     } else {
         audio_set_pins(pin1, pin2);
     }
-    audio_source_iter = mp_getiter(src);
+    audio_source_iter = mp_getiter(src, NULL);
     sample = false;
     fetcher_ready = true;
     audio_buffer_read_index = AUDIO_BUFFER_SIZE-1;
@@ -489,18 +486,18 @@ STATIC mp_obj_t audio_frame_subscr(mp_obj_t self_in, mp_obj_t index_in, mp_obj_t
     microbit_audio_frame_obj_t *self = (microbit_audio_frame_obj_t *)self_in;
     mp_int_t index = mp_obj_get_int(index_in);
     if (index < 0 || index >= AUDIO_CHUNK_SIZE) {
-         nlr_raise(mp_obj_new_exception_msg(&mp_type_ValueError, "index out of bounds"));
+         mp_raise_ValueError("index out of bounds");
     }
     if (value_in == MP_OBJ_NULL) {
         // delete
-        nlr_raise(mp_obj_new_exception_msg(&mp_type_TypeError, "Cannot delete elements of AudioFrame"));
+        mp_raise_TypeError("cannot delete elements of AudioFrame");
     } else if (value_in == MP_OBJ_SENTINEL) {
         // load
         return MP_OBJ_NEW_SMALL_INT(self->data[index]);
     } else {
         mp_int_t value = mp_obj_get_int(value_in);
         if (value < 0 || value > 255) {
-            nlr_raise(mp_obj_new_exception_msg(&mp_type_ValueError, "value out of range"));
+            mp_raise_ValueError("value out of range");
         }
         self->data[index] = value;
         return mp_const_none;
@@ -638,8 +635,8 @@ const mp_obj_type_t microbit_audio_frame_type = {
     .getiter = NULL,
     .iternext = NULL,
     .buffer_p = { .get_buffer = audio_frame_get_buffer },
-    .stream_p = NULL,
-    .bases_tuple = NULL,
+    .protocol = NULL,
+    .parent = NULL,
     .locals_dict = (mp_obj_dict_t*)&microbit_audio_frame_locals_dict,
 };
 
@@ -662,7 +659,6 @@ STATIC MP_DEFINE_CONST_DICT(audio_module_globals, audio_globals_table);
 
 const mp_obj_module_t audio_module = {
     .base = { &mp_type_module },
-    .name = MP_QSTR_audio,
     .globals = (mp_obj_dict_t*)&audio_module_globals,
 };
 

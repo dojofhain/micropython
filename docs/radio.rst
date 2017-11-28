@@ -10,11 +10,11 @@ The radio module is conceptually very simple:
 
 * Broadcast messages are of a certain configurable length (up to 251 bytes).
 * Messages received are read from a queue of configurable size (the larger the queue the more RAM is used). If the queue is full, new messages are ignored.
-* Messages are broadcast and received on a preselected channel (numbered 0-100).
+* Messages are broadcast and received on a preselected channel (numbered 0-83).
 * Broadcasts are at a certain level of power - more power means more range.
 * Messages are filtered by address (like a house number) and group (like a named recipient at the specified address).
 * The rate of throughput can be one of three pre-determined settings.
-* Send and receieve bytes to work with arbitrary data.
+* Send and receive bytes to work with arbitrary data.
 * As a convenience for children, it's easy to send and receive messages as strings.
 * The default configuration is both sensible and compatible with other platforms that target the BBC micro:bit.
 
@@ -65,7 +65,7 @@ Functions
     stored on the incoming message queue. If there are no spaces left on the
     queue for incoming messages, then the incoming message is dropped.
 
-    The ``channel`` (default=7) can be an integer value from 0 to 100
+    The ``channel`` (default=7) can be an integer value from 0 to 83
     (inclusive) that defines an arbitrary "channel" to which the radio is
     tuned. Messages will be sent via this channel and only messages received
     via this channel will be put onto the incoming message queue. Each step is
