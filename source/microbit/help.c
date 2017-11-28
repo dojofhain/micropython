@@ -179,6 +179,11 @@ STATIC const mp_doc_t help_table_instances[] = {
     // Love module
     {&love_module, "All you need. Use love.badaboom() to repeat the effect.\n"},
     {&love_badaboom_obj, "Hear my soul speak:\nThe very instant that I saw you, did\nMy heart fly to your service.\n"},
+    // rgb led
+    {&microbit_rgb_led_obj, "Calliopes RGB LED.\n"},
+    {&microbit_rgb_led_set_obj, "Use set(red, green, blue) to set the color of the LED.\n"},
+    {&microbit_rgb_led_on_obj, "Switch the LED on.\n"},
+    {&microbit_rgb_led_off_obj, "Switch the LED off.\n"}
 };
 
 bool mp_plat_specific_help(mp_obj_t args0) {
