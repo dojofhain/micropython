@@ -245,6 +245,11 @@ extern struct _microbit_uart_obj_t microbit_uart_obj;
 extern struct _microbit_spi_obj_t microbit_spi_obj;
 
 /****************************************************************/
+// microbit.rgb_led
+
+extern const struct _microbit_rgb_led_obj_t microbit_rgb_led_obj;
+
+/****************************************************************/
 // declarations of microbit functions and methods
 
 MP_DECLARE_CONST_FUN_OBJ_0(microbit_reset_obj);
@@ -311,5 +316,8 @@ MP_DECLARE_CONST_FUN_OBJ_VAR_BETWEEN(microbit_music_stop_obj);
 MP_DECLARE_CONST_FUN_OBJ_0(microbit_music_reset_obj);
 MP_DECLARE_CONST_FUN_OBJ_0(love_badaboom_obj);
 MP_DECLARE_CONST_FUN_OBJ_0(this_authors_obj);
+MP_DECLARE_CONST_FUN_OBJ_KW(microbit_rgb_led_set_obj);
+MP_DECLARE_CONST_FUN_OBJ_1(microbit_rgb_led_on_obj);
+MP_DECLARE_CONST_FUN_OBJ_1(microbit_rgb_led_off_obj);
 
 #endif // MICROPY_INCLUDED_MICROBIT_MODMICROBIT_H

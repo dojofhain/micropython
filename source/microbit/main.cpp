@@ -11,6 +11,7 @@ MicroPythonI2C ubit_i2c(I2C_SDA0, I2C_SCL0);
 MicroBitAccelerometer ubit_accelerometer(ubit_i2c);
 MicroBitCompass ubit_compass(ubit_i2c, ubit_accelerometer);
 MicroBitCompassCalibrator ubit_compass_calibrator(ubit_compass, ubit_accelerometer, ubit_display);
+CalliopeRGB calliope_rgb;
 
 extern "C" {
 
@@ -120,8 +121,8 @@ int main(void) {
         extern uint32_t __StackTop;
 #if __NEWLIB__ > 2 || (__NEWLIB__ == 2 && (__NEWLIB_MINOR__ > 4 || (__NEWLIB_MINOR == 4 && __NEWLIB_PATCHLEVEL > 0)))
         // newlib >2.4.0 uses more RAM for locale data.
-#warning "Detected newlib >2.4.0 so reducing heap by 305 bytes. See https://github.com/bbcmicrobit/micropython/issues/363 for details."
-        static uint32_t mp_heap[9935 / sizeof(uint32_t)];
+#warning "Detected newlib >2.4.0 so reducing heap by 330 bytes. See https://github.com/bbcmicrobit/micropython/issues/363 for details."
+        static uint32_t mp_heap[9910 / sizeof(uint32_t)];
 #else
         static uint32_t mp_heap[10240 / sizeof(uint32_t)];
 #endif

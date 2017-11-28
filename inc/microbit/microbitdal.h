@@ -29,6 +29,7 @@
 #include "MicroBitDisplay.h"
 #include "MicroBitCompass.h"
 #include "MicroBitCompassCalibrator.h"
+#include "CalliopeRGB.h"
 
 class MicroPythonI2C : public MicroBitI2C {
     public:
@@ -49,5 +50,6 @@ extern MicroBitAccelerometer ubit_accelerometer;
 extern MicroBitDisplay ubit_display;
 extern MicroBitCompass ubit_compass;
 extern MicroBitCompassCalibrator ubit_compass_calibrator;
+extern CalliopeRGB calliope_rgb;
 
 #endif // MICROPY_INCLUDED_MICROBIT_MICROBITDAL_H
